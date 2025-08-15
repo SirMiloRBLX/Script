@@ -55,7 +55,7 @@ end
 function Library:load_flags()
     if not isfile("Kyro/{game.GameId}.lua") then Library.save_flags() return end
 
-    local flags = readfile("Visual/{game.GameId}.lua")
+    local flags = readfile("Kyro/{game.GameId}.lua")
     if not flags then Library.save_flags() return end
 
     Library.Flags = HttpService:JSONDecode(flags)
@@ -1793,3 +1793,4 @@ end)
 end
 
 return Library
+
