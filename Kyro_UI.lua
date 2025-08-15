@@ -1,42 +1,37 @@
-local UserInputService = game:GetService('UserInputService')
-local LocalPlayer = game:GetService('Players').LocalPlayer
-local TweenService = game:GetService('TweenService')
-local HttpService = game:GetService('HttpService')
-local CoreGui = game:GetService('CoreGui')
-
-local Mouse = LocalPlayer:GetMouse();
-
-
+local UserInputService = game:GetService("UserInputService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local TweenService = game:GetService("TweenService")
+local HttpService = game:GetService("HttpService")
+local CoreGui = game:GetService("CoreGui)
+local Mouse = LocalPlayer:GetMouse()
+	
 local Library = {
-	connections = {};
-    Flags = {};
-    Enabled = true;
-    slider_drag = false;
-    core = nil;
-    dragging = false;
-    drag_position = nil;
-    start_position = nil;
+	connections = {}
+    Flags = {}
+    Enabled = true
+    slider_drag = false
+    core = nil
+    dragging = false
+    drag_position = nil
+    start_position = nil
 }
 
-
-if not isfolder("Visual") then
-    makefolder("Visual")
+if not isfolder("Kyro") then
+    makefolder("Kyro")
 end
 
 function Library:disconnect()
 	for _, value in Library.connections do
 		if not Library.connections[value] then
 			continue
-		end
-
-		Library.connections[value]:Disconnect()
+		end		Library.connections[value]:Disconnect()
 		Library.connections[value] = nil
 	end
 end
 
 function Library:clear()
 	for _, object in CoreGui:GetChildren() do
-		if object.Name ~= "Visual" then
+		if object.Name ~= "Kyro" then
 			continue
 		end
 	
@@ -54,13 +49,13 @@ function Library:save_flags()
     if not Library.exist() then return end
 
     local flags = HttpService:JSONEncode(Library.Flags)
-    writefile(`Visual/{game.GameId}.lua`, flags)
+    writefile("Kyro/{game.GameId}.lua", flags)
 end
 
 function Library:load_flags()
-    if not isfile(`Visual/{game.GameId}.lua`) then Library.save_flags() return end
+    if not isfile("Kyro/{game.GameId}.lua") then Library.save_flags() return end
 
-    local flags = readfile(`Visual/{game.GameId}.lua`)
+    local flags = readfile("Visual/{game.GameId}.lua")
     if not flags then Library.save_flags() return end
 
     Library.Flags = HttpService:JSONDecode(flags)
@@ -73,8 +68,7 @@ function Library:open()
 	self.Container.Visible = true
 	self.Shadow.Visible = true
 	self.Mobile.Modal = true
-
-	TweenService:Create(self.Container, TweenInfo.new(0.6, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut), {
+TweenService:Create(self.Container, TweenInfo.new(0.6, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut), {
 		Size = UDim2.new(0, 699, 0, 426)
 	}):Play()
 
@@ -137,7 +131,7 @@ end
 
 function Library.__init()
 	local container = Instance.new("ScreenGui")
-	container.Name = "Visual"
+	container.Name = "Kyro"
     container.Parent = CoreGui
 
     Library.core = container
@@ -1797,4 +1791,5 @@ end)
     end
     return Tab
 end
+
 return Library
