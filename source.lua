@@ -393,10 +393,10 @@ function OrionLib:MakeNotification(NotificationConfig)
 		NotificationConfig.Content = NotificationConfig.Content or "Test"
 
 		if NotificationConfig.Image then
-			NotificationConfig.Image = GetIcon(NotificationConfig.Image) or NotificationConfig.Image
-		else
-			NotificationConfig.Image = GetIcon("lucide-bell") or "rbxassetid://4384403532"
-		end
+	NotificationConfig.Image = GetIcon(NotificationConfig.Image) or NotificationConfig.Image
+else
+	NotificationConfig.Image = GetIcon("bell") or "rbxassetid://4384403532"
+					end
 
 		NotificationConfig.Time = NotificationConfig.Time or 15
 
@@ -730,10 +730,14 @@ function OrionLib:MakeWindow(WindowConfig)
 
 function TabFunction:MakeTab(TabConfig)
 	TabConfig = TabConfig or {}
-	TabConfig.Name = TabConfig.Name or "Tab"
-	TabConfig.Icon = TabConfig.Icon or ""
-	TabConfig.PremiumOnly = TabConfig.PremiumOnly or false
+TabConfig.Name = TabConfig.Name or "Tab"
+if TabConfig.Icon and TabConfig.Icon ~= "" then
+	TabConfig.Icon = GetIcon(TabConfig.Icon) or TabConfig.Icon
+else
+	TabConfig.Icon = ""
+end
 
+TabConfig.PremiumOnly = TabConfig.PremiumOnly or false
 	local TabFrame = SetChildren(SetProps(MakeElement("Button"), {
 		Size = UDim2.new(1, 0, 0, 30),
 		Parent = TabHolder
