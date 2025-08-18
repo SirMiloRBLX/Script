@@ -39,6 +39,10 @@ if not Success then
 end
 
 local function GetIcon(IconName)
+    if not IconName then return nil end
+    if not string.find(IconName, "lucide-") then
+        IconName = "lucide-" .. IconName
+    end
     return Icons[IconName] or nil
 end
 
